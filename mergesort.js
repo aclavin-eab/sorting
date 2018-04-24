@@ -6,17 +6,19 @@ function split(wholeArray) {
   return [firstHalf, secondHalf];
 }
 
-function merge(firstHalf, secondHalf){
-  let sortedArr = [];
-  while (firstHalf[0] || secondHalf[0]){
-      if ((!firstHalf[0] || firstHalf[0] > secondHalf[0]) && secondHalf[0]){
-        sortedArr.push(secondHalf[0]);
-        secondHalf.shift();
+function merge(left, right){
+  let sortedArr = [], leftIdx = 0, rightIdx = 0;
+  while (leftIdx < left.length && rightIdx < right.length){
+      if(left[leftIdx] < right[rightIdx]) {
+          sortedArr.push(left[leftIdx]);
+          leftIdx++;
       } else {
-        sortedArr.push(firstHalf[0]);
-        firstHalf.shift();
+          sortedArr.push(right[rightIdx]);
+          rightIdx++;
       }
   }
+  for(; leftIdx < left.length; leftIdx++) sortedArr.push(left[leftIdx]);
+  for(; rightIdx < right.length; rightIdx++) sortedArr.push(right[rightIdx]);
   return sortedArr;
 }
 
